@@ -46,6 +46,9 @@
         <activity
             android:name=".ui.auth.signin.AuthAnonymousActivity"
             android:label="SignIn by Anonymous" />
+        <activity
+            android:name=".ui.diffutil.SampleDiffUtilActivity"
+            android:label="ListAdapte + DiffUtil" />
     </application>
 
 </manifest>
