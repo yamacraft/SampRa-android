@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import io.github.yamacraft.app.sampra.R
 import io.github.yamacraft.app.sampra.data.ClassItem
 import io.github.yamacraft.app.sampra.ui.auth.AuthActivity
+import io.github.yamacraft.app.sampra.ui.diffutil.SampleDiffUtilActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private fun getMenu(): List<ClassItem> {
         val items = mutableListOf<ClassItem>()
         items.add(ClassItem(AuthActivity::class.java.simpleName, AuthActivity::class.java.name))
+        items.add(ClassItem(SampleDiffUtilActivity::class.java.simpleName, SampleDiffUtilActivity::class.java.name))
         return items.toList()
     }
 }
