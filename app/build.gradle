@@ -1,9 +1,6 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'com.google.firebase.appdistribution'
 
 def versionMajor = 1
@@ -16,16 +13,25 @@ def gitBranch = (System.getenv("CIRCLE_BRANCH") != null) ? System.getenv("CIRCLE
 def buildTime = new Date().format("yyyy-MM-dd'T'HH:mm'Z'", TimeZone.getTimeZone("JST"))
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
 
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
     defaultConfig {
         applicationId "io.github.yamacraft.app.sampra"
         minSdkVersion 23
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
         versionName "${versionMajor}.${versionMinor}.${versionPatch}-${gitSha}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -47,6 +53,7 @@ android {
             keyPassword "android"
         }
     }
+
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
@@ -63,6 +70,7 @@ android {
             }
         }
     }
+
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/LICENSE'
@@ -74,32 +82,33 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "com.google.firebase:firebase-core:17.2.1"
-    implementation "com.google.firebase:firebase-auth:19.2.0"
-    implementation "com.google.firebase:firebase-firestore:21.3.0"
+    implementation "com.google.firebase:firebase-core:18.0.0"
+    implementation "com.google.firebase:firebase-auth:20.0.1"
+    implementation "com.google.firebase:firebase-firestore:22.0.0"
 
-    implementation "com.google.android.gms:play-services-auth:17.0.0"
+    implementation "com.google.android.gms:play-services-auth:19.0.0"
 
-    implementation "androidx.appcompat:appcompat:1.1.0"
-    implementation "androidx.core:core-ktx:1.1.0"
-    implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0"
-    implementation "androidx.constraintlayout:constraintlayout:1.1.3"
+    implementation "androidx.appcompat:appcompat:1.2.0"
+    implementation "androidx.core:core-ktx:1.3.2"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.4"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
-    implementation "androidx.browser:browser:1.0.0"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation "androidx.browser:browser:1.2.0"
 
-    implementation "com.squareup.okhttp3:okhttp:3.12.1"
-    implementation "com.squareup.okhttp3:logging-interceptor:3.12.1"
-    implementation "com.squareup.retrofit2:retrofit:2.6.1"
-    implementation "com.squareup.retrofit2:converter-gson:2.6.1"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.2"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.2"
+    implementation "com.squareup.okhttp3:okhttp:4.2.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.2.1"
+    implementation "com.squareup.retrofit2:retrofit:2.7.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.7.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1-native-mt"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
 
     implementation "com.jakewharton.timber:timber:4.7.1"
 
-    testImplementation "junit:junit:4.12"
+    testImplementation "junit:junit:4.13.1"
 
-    androidTestImplementation "androidx.test:runner:1.2.0"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
+    androidTestImplementation "androidx.test:runner:1.3.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0"
 }
 apply plugin: 'com.google.gms.google-services'
