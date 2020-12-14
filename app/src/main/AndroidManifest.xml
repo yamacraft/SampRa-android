@@ -49,6 +49,9 @@
         <activity
             android:name=".ui.diffutil.SampleDiffUtilActivity"
             android:label="ListAdapte + DiffUtil" />
+        <activity
+            android:name=".ui.webview.WebViewSampleActivity"
+            android:label="WebView" />
     </application>
 
 </manifest>
